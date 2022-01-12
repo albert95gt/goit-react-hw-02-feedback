@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import Statistics from '../Statistics';
+import FeedbackOptions from '../FeedbackOptions';
 
 class App extends Component {
   state = {
@@ -12,12 +14,14 @@ class App extends Component {
   getStateEntries = () => {
     return Object.entries(this.state);
   };
-  incrementFeedbackBtn = key => {
-    this.setState(state => {
-      return {
-        [key]: state[key] + 1,
-      };
-    });
+  incrementFeedbackBtn = event => {
+    const { label } = event.currentTarget;
+    console.log(label);
+    // this.setState(prevState => {
+    //   return {
+    //     [label]: prevState[label] + 1,
+    //   };
+    // });
   };
   countTotalFeedback = () => {
     const stateValue = Object.values(this.state);
@@ -30,14 +34,15 @@ class App extends Component {
   };
 
   render() {
-    const stateKeys = this.getStateKeys();
-    const stateEntries = this.getStateEntries();
     const total = this.countTotalFeedback();
     const positiveFeedback = this.countPositiveFeedbackPercentage(total);
     return (
       <>
-        <h1>Please leave feedback</h1>
-        {stateKeys.map(key => {
+        <FeedbackOptions
+          options={this.state}
+          onLeaveFeedback={this.incrementFeedbackBtn}
+        />
+        {/* {stateKeys.map(key => {
           return (
             <button
               key={key}
@@ -47,22 +52,13 @@ class App extends Component {
               {key}
             </button>
           );
-        })}
+        })} */}
 
-        <h2>Statistics</h2>
-        <ul>
-          {stateEntries.map(([key, value]) => {
-            return (
-              <li key={key}>
-                {key}:<span>{value}</span>
-              </li>
-            );
-          })}
-        </ul>
-
-        <p>Total: {total}</p>
-
-        <p>Positive feedback: {positiveFeedback}%</p>
+        <Statistics
+          options={this.state}
+          total={total}
+          positivePercentage={positiveFeedback}
+        />
       </>
     );
   }
