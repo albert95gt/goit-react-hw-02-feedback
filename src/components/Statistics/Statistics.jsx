@@ -5,7 +5,6 @@ const Statistics = ({ options, total, positivePercentage }) => {
 
   return (
     <>
-      <h2>Statistics</h2>
       <ul>
         {stateEntries.map(([key, value]) => {
           return (

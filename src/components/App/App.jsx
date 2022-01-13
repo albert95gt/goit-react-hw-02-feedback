@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
+import Wrapper from '../Wrapper';
 import Statistics from '../Statistics';
 import FeedbackOptions from '../FeedbackOptions';
+import Section from '../Section';
+import Notification from '../Notification';
 
 class App extends Component {
   state = {
@@ -8,20 +11,13 @@ class App extends Component {
     neutral: 0,
     bad: 0,
   };
-  getStateKeys = () => {
-    return Object.keys(this.state);
-  };
-  getStateEntries = () => {
-    return Object.entries(this.state);
-  };
-  incrementFeedbackBtn = event => {
-    const { label } = event.currentTarget;
-    console.log(label);
-    // this.setState(prevState => {
-    //   return {
-    //     [label]: prevState[label] + 1,
-    //   };
-    // });
+
+  onClickFeedbackCount = event => {
+    const options = event.currentTarget.textContent;
+
+    this.setState(prevState => ({
+      [options]: prevState[options] + 1,
+    }));
   };
   countTotalFeedback = () => {
     const stateValue = Object.values(this.state);
@@ -37,29 +33,26 @@ class App extends Component {
     const total = this.countTotalFeedback();
     const positiveFeedback = this.countPositiveFeedbackPercentage(total);
     return (
-      <>
-        <FeedbackOptions
-          options={this.state}
-          onLeaveFeedback={this.incrementFeedbackBtn}
-        />
-        {/* {stateKeys.map(key => {
-          return (
-            <button
-              key={key}
-              type="button"
-              onClick={() => this.incrementFeedbackBtn(key)}
-            >
-              {key}
-            </button>
-          );
-        })} */}
+      <Wrapper title="">
+        <Section title="Please leave feedback">
+          <FeedbackOptions
+            options={this.state}
+            onLeaveFeedback={this.onClickFeedbackCount}
+          />
+        </Section>
 
-        <Statistics
-          options={this.state}
-          total={total}
-          positivePercentage={positiveFeedback}
-        />
-      </>
+        <Section title="Statistics">
+          {!total ? (
+            <Notification message="There is no feedback" />
+          ) : (
+            <Statistics
+              options={this.state}
+              total={total}
+              positivePercentage={!positiveFeedback ? 0 : positiveFeedback}
+            />
+          )}
+        </Section>
+      </Wrapper>
     );
   }
 }
