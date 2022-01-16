@@ -47,7 +47,15 @@ export const PositivePercentage = styled.p`
   margin-left: auto;
   font-size: 16px;
   width: 130px;
-  background-color: #0d8d09;
+  /* background-color: #0d8d09; */
+  background-color: ${({ positivePercentage }) => {
+    if (positivePercentage > 60) {
+      return '#2c6b22';
+    } else if (positivePercentage >= 50) {
+      return '#048085';
+    }
+    return '#db6c68';
+  }};
   color: #fff;
 
   border-radius: 5px;

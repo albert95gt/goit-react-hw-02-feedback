@@ -22,7 +22,7 @@ const Statistics = ({ options, total, positivePercentage }) => {
         })}
       </StatisticList>
       <Total>Total: {total}</Total>
-      <PositivePercentage>
+      <PositivePercentage positivePercentage={positivePercentage}>
         Positive feedback: {positivePercentage}%
       </PositivePercentage>
     </>

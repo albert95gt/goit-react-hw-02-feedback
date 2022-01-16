@@ -6,6 +6,10 @@ export const FeedbackOptionsBtns = styled.button`
   border: none;
   border-radius: 5px;
   color: #e9e3e3;
+  cursor: pointer;
+
+  transition: transform 200ms ease-out;
+
   :not(:last-child) {
     margin-right: 20px;
   }
