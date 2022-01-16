@@ -1,22 +1,30 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import {
+  StatisticList,
+  StatisticItems,
+  Total,
+  PositivePercentage,
+} from './Statistics.styled';
 
 const Statistics = ({ options, total, positivePercentage }) => {
   const stateEntries = Object.entries(options);
 
   return (
     <>
-      <ul>
+      <StatisticList>
         {stateEntries.map(([key, value]) => {
           return (
-            <li key={key}>
+            <StatisticItems key={key}>
               {key}: {value}
-            </li>
+            </StatisticItems>
           );
         })}
-      </ul>
-      <p>Total: {total}</p>
-      <p>Positive feedback: {positivePercentage}%</p>
+      </StatisticList>
+      <Total>Total: {total}</Total>
+      <PositivePercentage>
+        Positive feedback: {positivePercentage}%
+      </PositivePercentage>
     </>
   );
 };
