@@ -24,11 +24,10 @@ const Statistics = ({ good, neutral, bad, total, positivePercentage }) => {
 };
 
 Statistics.propTypes = {
-  options: PropTypes.shape({
-    good: PropTypes.number.isRequired,
-    neutral: PropTypes.number.isRequired,
-    bad: PropTypes.number.isRequired,
-  }).isRequired,
+  good: PropTypes.number.isRequired,
+  neutral: PropTypes.number.isRequired,
+  bad: PropTypes.number.isRequired,
+
   total: PropTypes.number.isRequired,
   positivePercentage: PropTypes.number.isRequired,
 };
