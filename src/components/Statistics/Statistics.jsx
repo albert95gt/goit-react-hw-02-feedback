@@ -7,19 +7,13 @@ import {
   PositivePercentage,
 } from './Statistics.styled';
 
-const Statistics = ({ options, total, positivePercentage }) => {
-  const stateEntries = Object.entries(options);
-
+const Statistics = ({ good, neutral, bad, total, positivePercentage }) => {
   return (
     <>
       <StatisticList>
-        {stateEntries.map(([key, value]) => {
-          return (
-            <StatisticItems key={key}>
-              {key}: {value}
-            </StatisticItems>
-          );
-        })}
+        <StatisticItems key={'good'}>good: {good}</StatisticItems>
+        <StatisticItems key={'neutral'}>neutral: {neutral}</StatisticItems>
+        <StatisticItems key={'bad'}>bad: {bad}</StatisticItems>
       </StatisticList>
       <Total>Total: {total}</Total>
       <PositivePercentage positivePercentage={positivePercentage}>

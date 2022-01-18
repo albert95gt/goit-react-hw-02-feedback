@@ -3,11 +3,9 @@ import PropTypes from 'prop-types';
 import { FeedbackOptionsBtns } from './FeedbackOptions.styled';
 
 function FeedbackOptions({ options, onLeaveFeedback }) {
-  const optionsKey = Object.keys(options);
-
   return (
     <>
-      {optionsKey.map(key => {
+      {options.map(key => {
         return (
           <FeedbackOptionsBtns
             key={key}
